@@ -14,6 +14,19 @@ form.addEventListener(`submit`, function(e){
         `
         let repoURL = document.getElementById("repo")
         console.log(repoURL)
+        repoURL.addEventListener(`click`, function(event){
+            fetch(`https://api.github.com/users/${search}/repos`)
+            .then((response) => response.json())
+            .then((data) => {
+                data.forEach(repo => {
+                    const repoList = document.getElementById("repos-list") 
+                    let listedRepo = document.createElement("li")
+                    listedRepo.innerHTML = `
+                    <p>${repo.name}</p>`
+                    repoList.append(listedRepo)
+                })
+            })      
+        }) 
     })
 })    
     
